@@ -1,0 +1,300 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .resume { max-width: 820px; margin: 0 auto; padding: 2rem 2rem 1rem; background: var(--color-background-primary); }
+  .header { border-bottom: 1.5px solid var(--color-border-primary); padding-bottom: 1rem; margin-bottom: 1.2rem; }
+  .name { font-size: 26px; font-weight: 500; color: var(--color-text-primary); letter-spacing: -0.3px; }
+  .tagline { font-size: 13px; color: var(--color-text-secondary); margin-top: 3px; }
+  .contact { display: flex; gap: 16px; margin-top: 8px; flex-wrap: wrap; }
+  .contact span { font-size: 12px; color: var(--color-text-secondary); }
+  .contact a { font-size: 12px; color: var(--color-text-info); text-decoration: none; }
+  .grid { display: grid; grid-template-columns: 1fr 220px; gap: 1.5rem; align-items: start; }
+  .section { margin-bottom: 1.2rem; }
+  .section-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); margin-bottom: 8px; padding-bottom: 3px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .item { margin-bottom: 8px; }
+  .item-header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .item-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+  .item-meta { font-size: 12px; color: var(--color-text-secondary); white-space: nowrap; }
+  .item-sub { font-size: 12px; color: var(--color-text-secondary); margin-top: 1px; }
+  .toggle-btn { display: flex; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 2px 0; margin-top: 3px; }
+  .toggle-label { font-size: 12px; color: var(--color-text-info); }
+  .chevron { width: 10px; height: 10px; transition: transform 0.2s; display: inline-block; }
+  .chevron svg { width: 10px; height: 10px; }
+  .chevron.open { transform: rotate(90deg); }
+  .details { display: none; margin-top: 6px; padding-left: 0; }
+  .details.open { display: block; }
+  .details ul { list-style: none; padding: 0; }
+  .details ul li { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; padding: 2px 0 2px 12px; position: relative; }
+  .details ul li::before { content: '–'; position: absolute; left: 0; color: var(--color-text-tertiary); }
+  .skill-group { margin-bottom: 8px; }
+  .skill-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+  .gpa-badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 20px; background: var(--color-background-success); color: var(--color-text-success); border: 0.5px solid var(--color-border-success); margin-left: 6px; }
+  .print-note { font-size: 11px; color: var(--color-text-tertiary); text-align: center; margin-top: 1rem; }
+  @media print { .print-note { display: none; } .details { display: block !important; } }
+</style>
+
+<div class="resume">
+  <div class="header">
+    <div class="name">Maxwell D. Fetterman</div>
+    <div class="tagline">Computer Science student · HPC & Secure Systems · UConn Stamford</div>
+    <div class="contact">
+      <span>New York, NY</span>
+      <span>347-325-2346</span>
+      <a href="mailto:maxwell.fetterman@gmail.com">maxwell.fetterman@gmail.com</a>
+      <a href="https://mfetd.github.io/" target="_blank">mfetd.github.io</a>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="section">
+        <div class="section-title">Education</div>
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">B.S. Computer Science — UConn Stamford</span>
+            <span class="item-meta">2023 – May 2027</span>
+          </div>
+          <div class="item-sub">GPA 3.98 · Major GPA 4.0 <span class="gpa-badge">Dean's List</span></div>
+          <div class="item-sub" style="margin-top:3px; font-size:11px;">Additional coursework: Carnegie Mellon (2014) · Ithaca College (2016) · U. South Alabama (2019)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Projects</div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Throttler</span>
+            <span class="item-meta">Python · Tkinter</span>
+          </div>
+          <div class="item-sub">Network throttling test harness with desktop GUI</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Launches a dedicated browser window under a throttled network port for controlled packet flow testing</li>
+              <li>Packaged as a Windows executable for quick distribution and repeatable workflows</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Limiter</span>
+            <span class="item-meta">Python · Pandas · Bash</span>
+          </div>
+          <div class="item-sub">Background app usage logger & enforcer</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Monitors target apps, writes structured logs, and generates daily/weekly/monthly usage charts</li>
+              <li>Enforces configurable time limits by terminating apps that exceed allowance; runs at startup</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Graph Puzzle Solver</span>
+            <span class="item-meta">Python</span>
+          </div>
+          <div class="item-sub">State-search solver with analytics</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Searches puzzle states, reconstructs solution paths; collects solution rate and per-index statistics</li>
+              <li>Stress-tested on 100k-length inputs; visualizes recurring successful index patterns</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Experience & Leadership</div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Teaching Assistant — CSE 1010</span>
+            <span class="item-meta">Fall 2025</span>
+          </div>
+          <div class="item-sub">UConn Stamford</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Led 2 weekly lab sections (~40 students) covering Python, Tkinter GUIs, and Pandas workflows</li>
+              <li>Supported debugging and project readiness through structured walkthroughs and coaching</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Freshman Head Coach — Stamford High Soccer</span>
+            <span class="item-meta">Fall 2024–Present</span>
+          </div>
+          <div class="item-sub">Stamford, CT</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Managed daily training plans for a 21-player roster; achieved a 9–4 season record</li>
+              <li>Advanced 2 athletes to MLS NEXT pre-professional level</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Sports Specialist — Long Ridge Camp</span>
+            <span class="item-meta">2023–Present</span>
+          </div>
+          <div class="item-sub">Stamford, CT</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Coordinated ~10 activities/day serving ~800 campers/week across Pre-K to 8th grade</li>
+              <li>Received "Egg-cellent Staff" award; delegated setup and execution to assistants</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Founder/CEO — Fetterman Construction</span>
+            <span class="item-meta">2022</span>
+          </div>
+          <div class="item-sub">Redmond, WA</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Delivered ~24 interior renovation projects via referral-driven acquisition; ~$80K annual gross</li>
+              <li>Managed estimating, scheduling, materials, subcontractors, and quality control</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <span class="item-title">Superintendent — Vanguard Construction</span>
+            <span class="item-meta">2016–2018</span>
+          </div>
+          <div class="item-sub">New York, NY</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Coordinated subcontractor teams on $1M+ commercial renovations; supervised up to 100 workers</li>
+              <li>Delivered projects on time with zero safety incidents, including the Pulitzer Prize office renovation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section">
+        <div class="section-title">Skills</div>
+        <div class="skill-group">
+          <div class="skill-label">Languages</div>
+          <div class="skill-tags">
+            <span class="tag">Python</span><span class="tag">C</span><span class="tag">Bash</span>
+          </div>
+        </div>
+        <div class="skill-group" style="margin-top:8px;">
+          <div class="skill-label">Parallel / HPC</div>
+          <div class="skill-tags">
+            <span class="tag">MPI</span><span class="tag">OpenMP</span><span class="tag">Pthreads</span>
+          </div>
+        </div>
+        <div class="skill-group" style="margin-top:8px;">
+          <div class="skill-label">Python stack</div>
+          <div class="skill-tags">
+            <span class="tag">Tkinter</span><span class="tag">Pandas</span><span class="tag">Flask</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Coursework</div>
+        <div class="item">
+          <div class="item-title" style="font-size:13px;">Systems & Parallel Computing</div>
+          <div class="item-sub">CSE 3100 · UConn Stamford</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>Parallel C implementations using MPI, OpenMP, and Pthreads on HPC systems</li>
+              <li>Analyzed distributed vs shared-memory parallelism tradeoffs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="item" style="margin-top:8px;">
+          <div class="item-title" style="font-size:13px;">Cybersecurity Lab</div>
+          <div class="item-sub">CSE 3140 · UConn Stamford</div>
+          <button class="toggle-btn" onclick="toggle(this)">
+            <span class="chevron"><svg viewBox="0 0 10 10" fill="none"><polyline points="3,2 7,5 3,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="toggle-label">Details</span>
+          </button>
+          <div class="details">
+            <ul>
+              <li>CSRF phishing, XSS attacks, and defensive controls evaluation</li>
+              <li>Brute-force and buffer overflow exploitation labs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Additional</div>
+        <div class="item">
+          <div class="item-title" style="font-size:13px;">Para-educator</div>
+          <div class="item-sub">Stamford School District · 2023–24</div>
+        </div>
+        <div class="item" style="margin-top:6px;">
+          <div class="item-title" style="font-size:13px;">General Manager</div>
+          <div class="item-sub">Gulf Coast Beads · 2019–20</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="print-note">Click any "Details" to expand · Print or save as PDF to export</div>
+</div>
+
+<script>
+function toggle(btn) {
+  const details = btn.nextElementSibling;
+  const chevron = btn.querySelector('.chevron');
+  const label = btn.querySelector('.toggle-label');
+  const isOpen = details.classList.contains('open');
+  details.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+  label.textContent = isOpen ? 'Details' : 'Hide';
+}
+</script>
